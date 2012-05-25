@@ -1,0 +1,3 @@
+[23-May-2012 15:19:34] OAuthException: An active access token must be used to query information about the current user.
+[24-May-2012 20:28:09] OAuthException: Error validating access token: User 100000788012232 has not authorized application 335118356499155.
+[24-May-2012 20:30:09] OAuthException: Error validating access token: User 100000788012232 has not authorized application 335118356499155.
