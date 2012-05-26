@@ -17,13 +17,13 @@
                                     </a>
 								</td>
 								<td class="menutab">
-									<!--<a class="menubigtab" href="../home.php">FriendScope</a>-->
+	
 								</td>
 								<td class="menutab">
-									<!--<a class="menutab" href = "">Profile</a>-->
+	
 								</td>
 								<td class="menutab">
-									<!--<a class="menutab" href = "">Home</a>-->
+
 								</td>
 								<td class="menutab">
                                 
