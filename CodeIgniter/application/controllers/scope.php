@@ -16,6 +16,9 @@ class Scope extends CI_Controller{
         
         //load Facebook php-sdk library with $config[] options
         $this->load->library('facebook', $config);
+		
+		//Encryption library
+		$this->load->library('encrypt');
 	}
 	
 	//Load main view to display data
@@ -66,7 +69,7 @@ class Scope extends CI_Controller{
 		if(!is_null($access_tokens)){
 			//Try every access token until one works
 			foreach($access_tokens as $token){
-				$access_token = $token[0];
+				$access_token = $this->encrypt->decode($token[0]);
 				$origin_pk_id = $token[1];
 				try{
 					//Call Facebook Api with given access token

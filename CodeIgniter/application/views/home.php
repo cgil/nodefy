@@ -24,6 +24,9 @@
 		 <div id="backimg2">
 			<img src="<?php echo base_url(); ?>Images/background2.png" alt="background2" />
 		 </div>
+         <div id="arrowimg">
+			<img src="<?php echo base_url(); ?>Images/login_arrow.png" alt="" />
+		 </div>
          <div id="header">
             <?= $header ?>
          </div>

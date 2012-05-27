@@ -12,17 +12,20 @@ class Cron_job extends CI_Controller{
         
         //load Facebook php-sdk library with $config[] options
         $this->load->library('facebook', $config);
+		
 	}
 	
 	//Insert a new users friends into the database as searcheable targets
 	function index(){
 		$this->load->model('Cron_job_model');
 		$this->load->model('Bulk_insert_model');
+		//Encryption library
+		$this->load->library('encrypt');
 		$new_users = $this->Cron_job_model->Select_users();
 		echo "Compiling new users friendslists to bring in....................<br/>";
 		foreach($new_users as $user){
 			//Get this users friends
-			$friendslist = $this->Get_friends($user['access_id'],$user['access_token']);
+			$friendslist = $this->Get_friends($user['access_id'],$this->encrypt->decode($user['access_token']));
 			if(!is_null($friendslist)){
 				//Prepare the array for insertion into db
 				$friendslist = $this->Prepare_array($friendslist,$user['PK_access']);
