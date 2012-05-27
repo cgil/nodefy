@@ -131,7 +131,8 @@ class Scope extends CI_Controller{
 	//Get all photos within an album store it in data['album_photos']
 	function Get_album_photos($albumID,$access_token){
 		try{
-			$params['access_token'] = $access_token;
+			$params['access_token'] = $this->encrypt->decode($access_token);
+			echo $params['access_token']  + "scope <br/>";
 			$params['limit'] = 100;
 			$photos = $this->facebook->api('/'.$albumID.'/photos','GET',$params);
 		} catch (FacebookApiException $e){

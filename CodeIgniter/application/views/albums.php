@@ -7,7 +7,7 @@
           <div class="album_box" style="width:150px; height:150px; float:left;">
               <div class="album_cover" style="float:left; clear:both;">
                   <a href="javascript:void(0)" onclick="get_photos_js('<?php echo $album[4] //album id ?>',
-                  '<?php echo $token ?>')">
+                  '<?php echo $this->encrypt->encode($token); ?>')">
                       <img src="<?php echo $album[5] //album_cover link ?>" alt="album_cover"/> 
                   </a>
               </div>

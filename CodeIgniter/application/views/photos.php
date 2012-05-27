@@ -1,7 +1,10 @@
 <div class="photo_container" id="photos" style="float:left; clear:both;">
     <h7>+Photos</h7>
     <div class="photo_holder">
-		<?php foreach ($album_photos as $photo):?>
+    
+		<?php 
+		if(!is_null($album_photos)){
+		foreach ($album_photos as $photo):?>
             <div class="photo_box" style="float:left;">
             
 <!-- This is code for the lightbox -->
@@ -12,7 +15,7 @@
      		</div>
 <!-- End of lightbox -->
         
-        <?php endforeach; ?>
+        <?php endforeach; } ?>
     </div>
                 
 </div>
