@@ -31,6 +31,9 @@
                <?= $search ?>
          </div>
          <div id="main" style="width:900px;">
+            <div id="friendbar" style="width:inherit;">
+               <?= $friendbar ?>
+            </div>
             <div id="info" style="width:inherit;">
                <?= $info ?>
             </div>
@@ -39,9 +42,6 @@
             </div>
             <div id="photos" style="width:inherit;">
                <?= $photos ?>
-            </div>
-            <div id="friendbar" style="width:inherit;">
-               <?= $friendbar ?>
             </div>
          </div>
          <div id="footer" style="width:inherit;">

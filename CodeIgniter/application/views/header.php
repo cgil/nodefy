@@ -16,6 +16,7 @@
                                     	<img src="<?php echo base_url(); ?>Images/friendscope_logo.png" alt="Friendscope" height="40" width="220" />
                                     </a>
 								</td>
+                                <!--
 								<td class="menutab">
 	
 								</td>
@@ -24,7 +25,8 @@
 								</td>
 								<td class="menutab">
 
-								</td>
+								</td> -->
+                                
 								<td class="menutab">
                                 
 									<a class="menutab" href = "<?php echo base_url(); ?>help">Help</a>

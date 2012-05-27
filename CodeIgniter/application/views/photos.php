@@ -7,7 +7,7 @@
 <!-- This is code for the lightbox -->
 
 				<!-- Thumbnail for photo outside -->
-				<a href = "javascript:void(0)" onclick = "photo_popup('<?php echo $photo['images'][0]['source']; ?>','<?php echo $photo['from']['name']; ?>')" alt="<?php echo $photo['from']['name'];  ?>')"><img src="<?php echo $photo['images'][2]['source']; ?>" alt="<?php echo $photo['from']['name'];  ?> "/> 
+				<a href = "javascript:void(0)" onclick = "photo_popup('<?php echo $photo['images'][0]['source']; ?>','<?php echo mysql_escape_string($photo['from']['name']); ?>')" alt="<?php echo $photo['from']['name'];  ?>')"><img src="<?php echo $photo['images'][2]['source']; ?>" alt="<?php echo $photo['from']['name'];  ?> "/> 
                 </a>
      		</div>
 <!-- End of lightbox -->

@@ -1,6 +1,6 @@
 /* Main CSS */
 #main{
-  width: 700px;
+  width: 900px;
   height: auto;
 }
 
@@ -31,14 +31,15 @@ z-index:-3;
 #wrapper {
 position:relative;
 top:0px;
-width:900px;
+width:100%;
 margin-left:auto;
 margin-right:auto;
 }
 
 #header td.imagelogo img {
     position:relative;
-    left:-140px;
+    margin-left:0px;
+	
 }
 
 #header td.menutab{
@@ -110,10 +111,10 @@ a:hover{
 }
 
 #albums div.album_container{
-    margin-top: 40px;
+    margin-top: -68px;
     width: 890px;
 height: auto;
-clear:both;
+clear: right;
 float:left;
 
 }
@@ -216,10 +217,12 @@ float:left;
 
 #photos div.photo_container div.photo_box img{
   overflow: hidden;
+  border:none;
 }
 
 #info div.info_container{
 	position:relative;
+	float: left;
 }
 
 #info h2{
@@ -240,11 +243,9 @@ float:left;
 }
 
 .friendbar_container{
-    position: absolute;
-    top: 102px;
-    right: -200px;
+    position: relative;
+    margin: 102px -200px auto auto;
     width: 200px;
-
     height: auto;
 
 	
