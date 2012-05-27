@@ -44,9 +44,9 @@
                <?= $photos ?>
             </div>
          </div>
+      </div>
          <div id="footer" style="width:inherit;">
             <?= $footer ?>
          </div>
-      </div>
    </body>
 </html>
