@@ -1,0 +1,186 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scraper</title>
+<link href="jquery-mobile/jquery.mobile-1.0a3.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.0a3.min.js" type="text/javascript"></script>
+<!-- This reference to phonegap.js will allow for code hints as long as the current site has been configured as a mobile application. 
+	 To configure the site as a mobile application, go to Site -> Mobile Applications -> Configure Application Framework... -->
+<script src="phonegap.js" type="text/javascript"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="jqueryScrape/jquery.scrape.js"></script>
+
+
+<script type="text/javascript">
+	
+	var encodedImageObject = [];
+
+	//Ajax call to download all images
+	function downloadImages(imagesObj)
+	{
+		var temp = [];
+			$.each(imagesObj,function(index,image)
+			{ 
+				
+				var loadUrl = image[1];
+				var ajax = new XMLHttpRequest();
+      			ajax.open("GET",loadUrl,true);
+    	    	ajax.send();
+     			ajax.onreadystatechange=function(){
+
+         		if(ajax.readyState==4 && (ajax.status==200)){
+						temp[0] = image[0];
+						temp[1] = window.btoa(unescape(encodeURIComponent(ajax.responseText))); // base64 encode a string
+						//encodedImageObject.push(temp);
+                		$('#grabContent').append("<br/>Downloaded image: "+ temp[0]);
+          		}	
+
+    		}
+			
+			});
+	}
+
+
+
+
+	var images = [];
+    jQuery('document').ready(function($) {
+
+        $.jqueryScrape.setProxyUrl('http://nodefy.com/scraper/jqueryScrape/jquery.scrape.proxy.php');
+		var nextPage = 'm.9gag.com';
+		var numberOfPagesToGrab = 15;
+		var pagesGrabbed = 1;
+		var totalImages = 0;
+		
+        $('body').bind('content', function(e, response) 
+		{
+            var content = $.jqueryScrape.span2img(response);
+			var title;
+			var imageURL;
+			var tempArr = [];
+			//Grab all images in content div
+			$('#content img', content).each(function(index)
+			{				
+				title = $(this).attr('alt');
+				imageURL = $(this).attr('src');
+				tempArr = [];
+				tempArr[0] = title;
+				tempArr[1] = imageURL;
+				//2D array of images with [title,imageurl];
+				images.push(tempArr);
+				tempArr = null;
+			});
+			//Grab next url from pagination
+			$('#jump_next', content).each(function(index)
+			{
+				nextPage = 'm.9gag.com' + $(this).attr('href');
+				if(pagesGrabbed < numberOfPagesToGrab)
+				{
+					$.jqueryScrape.getResult(nextPage, 'content');
+				}
+				else
+				{
+					downloadImages(images);
+				}
+				pagesGrabbed ++;
+			});
+
+			
+         });
+		 
+
+		 jQuery( '#grabButton' ).click(function() {
+        	$.jqueryScrape.getResult(nextPage, 'content');
+			$('#grabContent').append(function() {
+				var now = new Date();	
+				var hours = now.getHours();
+				var daytime;
+				if(hours >= 12)
+					daytime = "PM";
+				else
+					daytime = "AM";
+				if(hours != 12)
+				{
+					hours %= 12;
+				}
+					
+				var time_str=('0'+hours).substr(-2,2)+':'+('0'+now.getMinutes()).substr(-2,2)+':'+
+					('0'+now.getSeconds()).substr(-2,2) + ' ' + daytime;
+				
+				var displayDate = (now.getMonth()+1) + '/' + (now.getDate()) + '/' + now.getFullYear() + ' ' + time_str;
+                        return '<br/>Populated new images: '+ displayDate;
+                    });
+        	return true;
+   		 });
+		 
+		 
+		 jQuery( '#insertImages' ).click(function() {
+			if(images != null)
+			{
+				$.each(images,function(index,image){ 
+					$('#viewContent').append(function() {
+                        return '<div class = "imageContainer">' +
+						'<h1>' + image[0] + '</h1>' +
+						'<img alt="' + image[0] + '" src=" ' + image[1] + '" />' +
+						'</div>';
+                    });
+         		}); 	
+			}
+			
+        	return true;
+   		 });
+		
+    });
+	
+
+</script>
+
+
+</head> 
+<body> 
+
+<div data-role="page" id="page">
+	<div data-role="header" data-position="fixed">
+		<h1>Scraper</h1>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview">
+			<li id="insertImages"><a href="#page2">View</a></li>
+            <li><a href="#page3">Grab</a></li>
+		</ul>		
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h4></h4>
+	</div>
+</div>
+
+<div data-role="page" id="page2">
+	<div data-role="header"data-position="fixed">
+		<h1>View</h1>
+	</div>
+	<div id="viewContent" data-role="content">	
+		<!-- Image content gets populated by jquery here -->	
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h4></h4>
+	</div>
+</div>
+
+<div data-role="page" id="page3">
+	<div data-role="header" data-position="fixed">
+		<h1>Grab</h1>
+	</div>
+	<div id="grabContent" data-role="content">	
+    	<button id="grabButton" type="button">Grab images</button>
+		<!-- Grab message gets populated by jquery here -->	
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h4></h4>
+	</div>
+</div>
+
+</body>
+</html>
